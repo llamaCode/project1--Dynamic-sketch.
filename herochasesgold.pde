@@ -1,0 +1,156 @@
+int score=0;
+
+float sunX= 0, sunY= 100; //SUN
+float xBloog= width/2, yBloog=500; //CHARACTER
+float xGold= width/4, yGold= 600, goldW= 20, goldH= 30; //GOLD
+float xSpeed= -1, ySpeed= -1;
+
+boolean nearGold = true;
+
+//SETTING STATIC SCENE
+void setup() {
+  size (800, 800);
+  frameRate(60);
+}
+
+//CALLING THE SCENE
+void draw() {
+  score();
+  background(103, 227, 248); //SKY
+  scene();
+  drawBloog();
+  drawGold();
+  scoreGold();
+}
+
+//SETTING THE SCENE
+void scene() {
+
+  //GRASS
+  noStroke();
+  rectMode(CORNER);
+  fill(181, 185, 72);
+  rect(0, 500, 800, 300);
+
+  //HOUSE
+  fill(214, 59, 26);
+  rect(100, 400, 200, 100 );
+  fill(102, 39, 0);  
+  triangle( 100, 400, 300, 400, 200, 300 );
+
+  //ROOF
+  fill(0);
+  rect(175, 450, 50, 50);
+  rect(120, 410, 40, 40);
+  rect(240, 410, 40, 40);
+
+  //TREE #1
+  fill(94, 64, 38);
+  rect(600, 410, 30, 100);
+  fill(110, 121, 0);
+  ellipse(615, 380, 150, 150);
+
+  //TREE #2
+  fill(86, 56, 18);
+  rect(425, 450, 30, 75);
+  fill(97, 116, 0);
+  ellipse(440, 425, 100, 100);
+
+  //TREE #3
+  fill(127, 99, 52);
+  rect(500, 475, 30, 100);
+  fill(149, 168, 16);
+  ellipse(515, 450, 120, 120);
+
+  //SUN
+  fill(255, 255, 0);
+  ellipse(sunX, sunY, 120, 120);
+
+  //MOVING THE SUN ACROSS THE SKY
+  if (sunX > width) {
+    sunX = 0;
+    sunY = random(40, 200);
+  }
+  sunX = sunX+1;
+
+  //CLOUDS
+  fill(255);
+  ellipse(100, 100, 200, 60);
+  ellipse(100, 90, 100, 60);
+}
+
+void score () {
+  if (score < 0) fill (255, 0, 0);
+  if (score != 0) text( "SCORE: " + score, 400, 400);
+}
+
+//MOVE BLOOG TOWARD GOLD
+/*void bloogMove () {
+ float xMove = xBloog - xGold;
+ float yMove = yBloog - yGold;
+ xBloog = xBloog + xMove/20;
+ yBloog = yBloog + yMove/20;
+ }*/
+
+//BUILDING BLOOG
+void drawBloog() {
+  noStroke();
+  rectMode(CENTER);
+
+  //BODY
+  fill(128, 75, 23);
+  rect(xBloog, yBloog, 30, 100);
+  fill(181, 118, 54);
+  rect(xBloog, yBloog, 30, 50);
+  fill(0);
+  text("JAY", xBloog-13, yBloog+10);
+  text("VAH", xBloog-13, yBloog+20);
+
+  //HEAD
+  fill(247, 220, 193);
+  ellipse(xBloog, yBloog-30, 60, 60);
+
+  //EYES
+  fill(0);
+  ellipse(xBloog-19, yBloog-30, 16, 16);
+  ellipse(xBloog+19, yBloog-30, 16, 16);
+
+  //LEGS
+  stroke(150);
+  line(xBloog-10, yBloog+50, xBloog-10, yBloog+100);
+  line(xBloog+10, yBloog+50, xBloog+10, yBloog+100);
+
+  {
+    xBloog=  xBloog  +  (xGold-xBloog) / 100;    //BLOOG MOVES TOWARD THE GOLD
+    yBloog=  yBloog  +  (yGold-yBloog) / 100;
+  }
+  if (xBloog > width) {
+    xBloog = 0;
+    yBloog = random(0, 800);
+  }
+}
+
+void scoreGold() {
+  float x = xGold;
+  float y = yGold;
+  //*if (mousePressed) xGold += 50;
+}
+
+void drawGold() {
+  noStroke();
+  fill(255, 255, 0);
+  ellipse(xGold, yGold, goldW, goldH);
+
+  if ((xBloog > xGold-10) || (yBloog > yGold-10)) { 
+    xGold = random(0, 800);
+    yGold = random(0, 800);
+  }
+}
+
+//EVENT HANDLERS
+void mousePressed () {
+  if (mousePressed) 
+    xGold = mouseX;
+  yGold = mouseY;
+}
+
