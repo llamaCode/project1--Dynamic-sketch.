@@ -15,12 +15,12 @@ void setup() {
 
 //CALLING THE SCENE
 void draw() {
-  score();
+  /*score();*/
   background(103, 227, 248); //SKY
   scene();
   drawBloog();
   drawGold();
-  scoreGold();
+  /*scoreGold();*/
 }
 
 //SETTING THE SCENE
@@ -79,10 +79,10 @@ void scene() {
   ellipse(100, 90, 100, 60);
 }
 
-void score () {
+/*void score () {
   if (score < 0) fill (255, 0, 0);
   if (score != 0) text( "SCORE: " + score, 400, 400);
-}
+}*/
 
 //MOVE BLOOG TOWARD GOLD
 /*void bloogMove () {
@@ -121,8 +121,8 @@ void drawBloog() {
   line(xBloog+10, yBloog+50, xBloog+10, yBloog+100);
 
   {
-    xBloog=  xBloog  +  (xGold-xBloog) / 100;    //BLOOG MOVES TOWARD THE GOLD
-    yBloog=  yBloog  +  (yGold-yBloog) / 100;
+    xBloog=  xBloog  +  (xGold-xBloog) / 50;    //BLOOG MOVES TOWARD THE GOLD
+    yBloog=  yBloog  +  (yGold-yBloog) / 50;
   }
   if (xBloog > width) {
     xBloog = 0;
@@ -130,27 +130,30 @@ void drawBloog() {
   }
 }
 
-void scoreGold() {
+/*void scoreGold() {
   float x = xGold;
   float y = yGold;
   //*if (mousePressed) xGold += 50;
-}
+}*/ 
 
 void drawGold() {
   noStroke();
   fill(255, 255, 0);
   ellipse(xGold, yGold, goldW, goldH);
 
-  if ((xBloog > xGold-10) || (yBloog > yGold-10)) { 
+  xGold = xGold + xSpeed;
+  yGold = yGold + ySpeed;
+
+  if ((xBloog > xGold-10)|| (yBloog > yGold-10)) { 
     xGold = random(0, 800);
     yGold = random(0, 800);
   }
 }
 
 //EVENT HANDLERS
-void mousePressed () {
+/*void mousePressed () {
   if (mousePressed) 
     xGold = mouseX;
   yGold = mouseY;
-}
+}*/
 
