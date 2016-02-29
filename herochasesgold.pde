@@ -3,7 +3,7 @@ int score=0;
 float sunX= 0, sunY= 100; //SUN
 float xBloog= width/2, yBloog=500; //CHARACTER
 float xGold= width/4, yGold= 600, goldW= 20, goldH= 30; //GOLD
-float xSpeed= -1, ySpeed= -1;
+float xSpeed= 0, ySpeed= 0;
 
 boolean nearGold = true;
 
@@ -80,9 +80,9 @@ void scene() {
 }
 
 /*void score () {
-  if (score < 0) fill (255, 0, 0);
-  if (score != 0) text( "SCORE: " + score, 400, 400);
-}*/
+ if (score < 0) fill (255, 0, 0);
+ if (score != 0) text( "SCORE: " + score, 400, 400);
+ }*/
 
 //MOVE BLOOG TOWARD GOLD
 /*void bloogMove () {
@@ -119,41 +119,39 @@ void drawBloog() {
   stroke(150);
   line(xBloog-10, yBloog+50, xBloog-10, yBloog+100);
   line(xBloog+10, yBloog+50, xBloog+10, yBloog+100);
-
-  {
-    xBloog=  xBloog  +  (xGold-xBloog) / 50;    //BLOOG MOVES TOWARD THE GOLD
-    yBloog=  yBloog  +  (yGold-yBloog) / 50;
-  }
-  if (xBloog > width) {
-    xBloog = 0;
-    yBloog = random(0, 800);
-  }
 }
 
 /*void scoreGold() {
-  float x = xGold;
-  float y = yGold;
-  //*if (mousePressed) xGold += 50;
-}*/ 
+ float x = xGold;
+ float y = yGold;
+ //*if (mousePressed) xGold += 50;
+ }*/
 
 void drawGold() {
   noStroke();
   fill(255, 255, 0);
   ellipse(xGold, yGold, goldW, goldH);
 
+  xBloog=  xBloog  +  (xGold-xBloog) / 50;    //BLOOG MOVES TOWARD THE GOLD
+  yBloog=  yBloog  +  (yGold-yBloog) / 50;
+
+  if (xBloog > width) {
+    xBloog = 0;
+    yBloog = random(0, 800);
+  }
+
   xGold = xGold + xSpeed;
   yGold = yGold + ySpeed;
 
-  if ((xBloog > xGold-10)|| (yBloog > yGold-10)) { 
-    xGold = random(0, 800);
-    yGold = random(0, 800);
+  if (dist(xBloog, yBloog, xGold, yGold) < 50) { 
+    xGold = random(400, 800);
+    yGold = random(600, 800);
   }
 }
 
 //EVENT HANDLERS
 /*void mousePressed () {
-  if (mousePressed) 
-    xGold = mouseX;
-  yGold = mouseY;
-}*/
-
+ if (mousePressed) 
+ xGold = mouseX;
+ yGold = mouseY;
+ }*/
