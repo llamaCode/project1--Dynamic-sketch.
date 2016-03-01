@@ -3,7 +3,6 @@ int score=0;
 float sunX= 0, sunY= 100; //SUN
 float xBloog= width/2, yBloog=500; //CHARACTER
 float xGold= width/4, yGold= 600, goldW= 20, goldH= 30; //GOLD
-float xSpeed= 0, ySpeed= 0;
 
 int counter= 100;
 
@@ -123,8 +122,6 @@ void drawGold() {
   if (xBloog == xGold){
     counter = counter + 100;
   }
-  xGold = xGold + xSpeed;
-  yGold = yGold + ySpeed;
 
   if (dist(xBloog, yBloog, xGold, yGold) < 50) { 
     xGold = random(400, 800);
