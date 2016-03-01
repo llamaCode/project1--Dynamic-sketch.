@@ -119,7 +119,10 @@ void drawGold() {
     xBloog = 0;
     yBloog = random(0, 800);
   }
-
+  
+  if (xBloog == xGold){
+    counter = counter + 100;
+  }
   xGold = xGold + xSpeed;
   yGold = yGold + ySpeed;
 
