@@ -1,5 +1,3 @@
-int score=0;
-
 float sunX= 0, sunY= 100; //SUN
 float xBloog= width/2, yBloog=500; //CHARACTER
 float xGold= width/4, yGold= 600, goldW= 20, goldH= 30; //GOLD
