@@ -1,0 +1,159 @@
+///Draw creature and add motion to the design
+float xChee=70, yChee=350, dxChee=2, dyChee=3;
+float horizon;
+float sunx= 430;
+float suny=100;
+float xNugget=125;
+float yNugget=300;
+
+///SET UP: Define screen size, set modes 
+void setup() {
+  size( 500, 500);
+  horizon=  height / 2;   //bounces off the horizon
+}
+
+void draw() {
+  background(100, 200, 200 );
+  sun();
+  scene();
+  Chee();
+  nugget();
+  message();
+  moveChee();
+
+  /* monster();*/
+}
+
+void scene() {
+
+  rectMode(CORNER);
+
+  // the sky
+  fill(62, 199, 50);
+  rect(0, 249, 500, 250, 2);       //x,y,width,height,radius 1/2 background 
+
+  // Draw a pink house, with roof. 
+  fill( 255, 50, 300 );         // pink house 
+  rect( 150, 150, 200, 100 );       //body house 
+  fill(200, 150, 90); 
+  triangle( 150, 150, 350, 150, 245, 50 );       // Roof 
+  fill(200);
+  rect(160, 160, 40, 30 );          ///house windows
+  rect(300, 160, 40, 30);
+  rect(230, 210, 40, 40);            //house door
+
+  ///Draw trees 
+  noStroke();
+  {
+    fill(49, 163, 39); 
+    ellipse(390, 113, 75, 85); //top of tree 
+    fill(190, 110, 20);
+    rect(418, 196, 20, 60);//trunk
+  }
+  fill(49, 163, 39);
+  {      ///average size tree to the right
+    ellipse(450, 170, 50, 50);
+    fill(190, 110, 20);
+    rect(465, 217, 20, 40);
+  }
+  fill(49, 163, 39);      // smallest tree to the lft
+  ellipse(370, 190, 50, 40);
+  fill(190, 110, 20);
+  rect(389, 228, 15, 40);
+}
+
+//// Move
+void moveChee() {
+  //MOVE TOWARD GOLD
+  xChee = xChee + (xNugget-xChee) / 50;
+  yChee = yChee + (yNugget-yChee)/ 50;
+
+  //IF THE DISTANCE BETWEEN CHEE + GOLD IS < 50 THEN GOLD RESETS
+  if (dist(xChee, yChee, xNugget, yNugget) < 50) {
+    xNugget = random(0, 400);
+    yNugget = random(0, 400);
+  }
+}
+
+
+//THIS WAS YOUR CODE
+/*{
+ // check boundaries
+ if (xChee > width || xChee<0) {  /// moves nugget down
+ dxChee= dxChee * -1;
+ }
+ if (yChee > height || yChee<horizon) {  /// returns nugget bounce
+ dyChee= dyChee* -.5;
+ } 
+ 
+ 
+ // move the creature
+ xChee=  xChee + dxChee ;
+ yChee=  yChee + dyChee ;
+ }*/
+void Chee () {
+  // Starting position of creature. 
+  //// ZOOG: draw a creature at (x,y) 
+
+  fill(255 ); // white body of the creature 
+  rect( xChee, yChee, 50, 80 ); // Body (x,y,width,height) 
+  ellipse( xChee+10, yChee -20, 40, 40); // Head 
+  fill(255, 0, 0); // red eyes 
+  noStroke(); 
+
+  float x, y;
+  x= xChee;
+  y= yChee;
+
+  ellipse( x+15, y-25, 12, 12 ); // Eyes 
+  ellipse( x+35, y-25, 12, 12 ); 
+  fill(0); 
+  ellipse(x+15, y-25, 5, 5); //pupil
+  ellipse(x+35, y-25, 5, 5); //pupils 
+  line(225, 275, 225, 280); //nose 
+  line(215, 380, 215, 420); //legs left->right 
+  line(235, 380, 235, 420);
+}
+
+
+void nugget() {
+  //draw a gold nugget 
+  ellipseMode(CORNER); 
+  fill( 255, 120, 0 ); 
+  noStroke(); 
+  ellipse(xNugget, yNugget, 40, 20); //Gold fill
+}
+
+void sun() {
+  //the sun
+  fill(255, 200, 0);
+  ellipseMode(CORNER);
+  ellipse(sunx, suny, 60, 60);    //sun position
+
+  if (sunx > width) {   //makes the sun move though the x axis
+    sunx=0;
+    suny= random(10, 50); // moves he sun slighly up and down
+  }  
+  sunx= sunx +1;
+}
+////project 2
+/* void monster(){
+ fill(155);
+ ellipse(330,300,80,80); /// face
+ //eyes
+ fill(255);
+ rect(345,320,10,20);  // left eye
+ ellipse(380,320,20,30);
+ fill(0);
+ rect(354,378,30,30);  ///neck
+ arc(355,345,30,30,1,90); //mouth
+ fill(255);
+ text("Jume",355,390);      /// Jume monster naem
+ }
+ */
+void message() {
+  // MESSAGES: title & author  
+  fill(255); 
+  text( "Project 1: Shuash chasing gold.", 15, 15 ); 
+  text( "Kelly Hernandez, CST 112", 15, height-15 );
+} 
