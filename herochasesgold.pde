@@ -15,7 +15,6 @@ void setup() {
 
 //CALLING THE SCENE
 void draw() {
-  /*score();*/
   background(103, 227, 248); //SKY
   scene();
   drawBloog();
