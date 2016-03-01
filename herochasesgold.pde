@@ -5,7 +5,7 @@ float xBloog= width/2, yBloog=500; //CHARACTER
 float xGold= width/4, yGold= 600, goldW= 20, goldH= 30; //GOLD
 float xSpeed= 0, ySpeed= 0;
 
-boolean nearGold = true;
+int counter= 100;
 
 //SETTING STATIC SCENE
 void setup() {
@@ -20,7 +20,7 @@ void draw() {
   scene();
   drawBloog();
   drawGold();
-  /*scoreGold();*/
+  messages();
 }
 
 //SETTING THE SCENE
@@ -79,19 +79,6 @@ void scene() {
   ellipse(100, 90, 100, 60);
 }
 
-/*void score () {
- if (score < 0) fill (255, 0, 0);
- if (score != 0) text( "SCORE: " + score, 400, 400);
- }*/
-
-//MOVE BLOOG TOWARD GOLD
-/*void bloogMove () {
- float xMove = xBloog - xGold;
- float yMove = yBloog - yGold;
- xBloog = xBloog + xMove/20;
- yBloog = yBloog + yMove/20;
- }*/
-
 //BUILDING BLOOG
 void drawBloog() {
   noStroke();
@@ -121,12 +108,6 @@ void drawBloog() {
   line(xBloog+10, yBloog+50, xBloog+10, yBloog+100);
 }
 
-/*void scoreGold() {
- float x = xGold;
- float y = yGold;
- //*if (mousePressed) xGold += 50;
- }*/
-
 void drawGold() {
   noStroke();
   fill(255, 255, 0);
@@ -149,9 +130,10 @@ void drawGold() {
   }
 }
 
-//EVENT HANDLERS
-/*void mousePressed () {
- if (mousePressed) 
- xGold = mouseX;
- yGold = mouseY;
- }*/
+void messages(){
+  fill(0);
+  text( "Hero Chases Gold", 10, 20);
+  text( "By Maria Campagna", 10, 40);
+  text( "CST 112 - Introduction to Programming", 10, 60);
+  text(counter, width-50, 20);
+}
