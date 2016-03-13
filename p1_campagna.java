@@ -2,7 +2,7 @@ float sunX= 0, sunY= 100; //SUN
 float xBloog= width/2, yBloog=500; //CHARACTER
 float xGold= width/4, yGold= 600, goldW= 20, goldH= 30; //GOLD
 
-int counter= 100;
+int counter= 0;
 
 //SETTING STATIC SCENE
 void setup() {
@@ -116,18 +116,16 @@ void drawGold() {
     xBloog = 0;
     yBloog = random(0, 800);
   }
-  
-  if (xBloog == xGold){
-    counter = counter + 100;
-  }
 
   if (dist(xBloog, yBloog, xGold, yGold) < 50) { 
     xGold = random(400, 800);
     yGold = random(600, 800);
+    {
+      counter = counter + 100;
+    }
   }
 }
-
-void messages(){
+void messages() {
   fill(0);
   text( "Hero Chases Gold", 10, 20);
   text( "By Maria Campagna", 10, 40);
